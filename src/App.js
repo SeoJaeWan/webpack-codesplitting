@@ -1,29 +1,31 @@
-import React from "react";
-import styled from "styled-components";
-// import blackHanSans from "./assets/fonts/BlackHanSans-Regular.ttf";
+import React, { lazy, Suspense } from "react";
+import { Route, Routes, Link } from "react-router-dom";
+const FirstComponent = lazy(() =>
+  import(/*webpackChunkName: "firstComponent"*/ "./components/FirstComponent")
+);
+const SecondComponent = lazy(() =>
+  import(/*webpackChunkName: "secondComponent"*/ "./components/SecondComponent")
+);
 
-const CustomDiv = styled.div`
-  @font-face {
-    font-family: "BlackHanSans";
-    src: url("./assets/fonts/BlackHanSans-Regular.ttf") format("truetype");
-  }
-
-  * {
-    font-family: "BlackHanSans";
-  }
-`;
-
-const App = () => {
-  // console.log(blackHanSans);
+const App = ({}) => {
   return (
-    <div>
+    <>
       <div>
-        <h1>Hello! Webpack World!</h1>
+        <p>
+          <Link to="/">Go First</Link>
+        </p>
+        <p>
+          <Link to="/Second">Go Second</Link>
+        </p>
       </div>
-      <CustomDiv>
-        <h1>Hello! Webpack World!</h1>
-      </CustomDiv>
-    </div>
+
+      <Suspense fallback={<div>Loading...!</div>}>
+        <Routes>
+          <Route exact path="/" element={<FirstComponent />} />
+          <Route exact path="/Second" element={<SecondComponent />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 };
 

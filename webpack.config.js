@@ -2,15 +2,21 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: { index: "./src/index.js", admin: "./src/Admin/admin.js" },
+
   output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "main.js",
+    path: path.join(__dirname, "/build"),
+    filename: "[name].bundle.js",
   },
+
+  resolve: {
+    extensions: [".js", ".jsx"],
+  },
+
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_module/,
         use: {
           loader: "babel-loader",
@@ -46,17 +52,10 @@ module.exports = {
       },
     ],
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      title: "Test Title",
-      meta: {
-        "X-UA-Compatible": {
-          "http-equiv": "X-UA-Compatible",
-          content: "IE=edge",
-        },
-      },
-      favicon: `favicon.svg`,
     }),
   ],
 };
