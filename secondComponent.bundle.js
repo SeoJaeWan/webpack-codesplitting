@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebpack=self.webpackChunkwebpack||[]).push([[365],{338:(e,n,c)=>{c.r(n),c.d(n,{default:()=>u});var t=c(294);function u(){return t.createElement("div",null,"SecondComponent")}}}]);
